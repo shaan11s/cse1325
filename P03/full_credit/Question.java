@@ -33,9 +33,9 @@ public class Question {
     @Override
     public String toString(){
         StringBuilder str = new StringBuilder();
-        str.append(questionNumber + " " +  question + "\n");
+        str.append(questionNumber + ") " +  question + "\n");
         for(String a: answers){
-            str.append(a + "\n");
+            str.append("  " + a + "\n");
         }
 
         return str.toString();

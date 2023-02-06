@@ -25,10 +25,8 @@ public double takeQuiz(){
 
         }
     }
-
-    double tester1 = correctAnswers;
-    double tester2 = questions.length;
-    double grade = tester1/tester2;
+    
+    double grade = (double)correctAnswers/questions.length;
     myScanner.close();
     return grade;
  
