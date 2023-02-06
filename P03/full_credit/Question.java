@@ -1,6 +1,6 @@
 public class Question {
     //attributes or fields
-    private int nextQuestionNumber = 1;
+    private static int nextQuestionNumber = 1;
     private final int questionNumber;
     private String question;
     private String[] answers;
@@ -23,16 +23,22 @@ public class Question {
 
     public boolean checkAnswer(int answer){
 
-        if(answer == this.rightAnswer){
+        if (answer == this.rightAnswer){
             return true;
-        } 
-            else{
-              return false;
-            }
+        } else {
+            return false;
+        }
     }
 
     @Override
     public String toString(){
-        return questionNumber + " " +  question + "\n" + answers;
+        StringBuilder str = new StringBuilder();
+        str.append(questionNumber + " " +  question + "\n");
+        for(String a: answers){
+            str.append(a + "\n");
+        }
+
+        return str.toString();
     }
 }
+
