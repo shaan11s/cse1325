@@ -22,7 +22,3 @@ public abstract class Product{
     }
 
 }
-
-
-
-

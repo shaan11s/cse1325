@@ -75,16 +75,13 @@ public class Store{
             //here is error checking and loop exit NEED TO TRY CATCH PROPERLY
             String input = myScanner.nextLine();
 
-
             int inputInt = Integer.parseInt(input);
             if(inputInt < 0){
-                System.out.println("COME BACK SOON!");
                 myScanner.close();
-                System.exit(0);
+                throw new IllegalArgumentException("COME BACK SOON! [negative number was enetered]");
             }
             //here is error checking and loop exit NEED TO TRY CATCH PROPERLY
             //here is error checking and loop exit NEED TO TRY CATCH PROPERLY
-
 
 
             if(input.equals("1")){
@@ -118,4 +115,3 @@ public class Store{
         }
     }
 }
-
