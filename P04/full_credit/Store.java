@@ -8,7 +8,6 @@ public class Store{
     public static void main(String[] args){
         Scanner myScanner = new Scanner(System.in);
         
-        
         Taxed.setTaxRate(.0875);
         
         Product Milk = new Taxfree("Milk", 6.98);
@@ -27,33 +26,46 @@ public class Store{
         products.add(Jerkey);
         products.add(Cookies);
 
+        double orderTotal = 0.00;
+
         while(true){
-            System.out.println("== WELCOME TO THE BODEGA ==\n\n");
+            System.out.println("===========================\n");
+            System.out.println("== WELCOME TO THE BODEGA ==\n");
+            System.out.println("== TODAYS DEALS BELOW!!! ==\n");
+            System.out.println("===========================\n\n");
             System.out.println(products);
             System.out.println("\n\n== YOUR CART ==\n\n");
             System.out.println(shoppingCart);
+            System.out.println("ORDER TOTAL " + orderTotal);
             System.out.println("\n\n");
             String input = myScanner.nextLine();
             if(input.equals("1")){
                 shoppingCart.add(Milk);
+                orderTotal+=Milk.price();
             }
             if(input.equals("2")){
                 shoppingCart.add(Eggs);
+                orderTotal+=Eggs.price();
             }
             if(input.equals("3")){
                 shoppingCart.add(Cheese);
+                orderTotal+=Cheese.price();
             }
             if(input.equals("4")){
                 shoppingCart.add(Coconut);
+                orderTotal+=Coconut.price();
             }
             if(input.equals("5")){
                 shoppingCart.add(Takis);
+                orderTotal+=Takis.price();
             }
             if(input.equals("6")){
                 shoppingCart.add(Jerkey);
+                orderTotal+=Jerkey.price();
             }
             if(input.equals("7")){
                 shoppingCart.add(Cookies);
+                orderTotal+=Cookies.price();
             }
             // else{
             //     myScanner.close();
