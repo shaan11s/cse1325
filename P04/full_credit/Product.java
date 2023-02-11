@@ -3,14 +3,13 @@ public abstract class Product{
     protected double cost;
     protected String name;
 
-    public Product(String name, double cost){
+    public Product(String name, double cost)throws RuntimeException{
 
         this.name = name;
+        this.cost = cost;
 
-        try{
-            this.cost = cost;
-        }catch(RuntimeException e){
-        System.out.println("Cost can not be negative.");
+        if(cost <0){
+            throw new RuntimeException("Cost must be a positive integer.");
         }
 
     }
@@ -19,7 +18,7 @@ public abstract class Product{
 
     @Override
     public String toString(){
-        return (name + " (" + cost + ") " + price());
+        return (name + " ($" + cost + ")");
     }
 
 }
