@@ -6,6 +6,9 @@ public class Store{
     private static ArrayList<Product> products = new ArrayList<Product>();
     private static ArrayList<Product> shoppingCart = new ArrayList<Product>();
     public static void main(String[] args){
+
+        try{
+
         Scanner myScanner = new Scanner(System.in);
         
         Taxed.setTaxRate(.0875);
@@ -77,8 +80,8 @@ public class Store{
 
             int inputInt = Integer.parseInt(input);
             if(inputInt < 0){
-                myScanner.close();
-                throw new IllegalArgumentException("COME BACK SOON! [negative number was enetered]");
+                break;
+                //throw new IllegalArgumentException("COME BACK SOON! [negative number was enetered]");
             }
             //here is error checking and loop exit NEED TO TRY CATCH PROPERLY
             //here is error checking and loop exit NEED TO TRY CATCH PROPERLY
@@ -113,5 +116,11 @@ public class Store{
                 orderTotal+=Cookies.price();
             }
         }
+        System.out.println("COME AGAIN SOON!");
+        myScanner.close();
+        System.exit(0);
+    } catch (Exception e){
+        System.out.println("Incorrect Data");
+      }
     }
 }
