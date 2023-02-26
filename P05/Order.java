@@ -13,6 +13,7 @@ public class Order {
     public void addComputer(Computer computer){
         computers.add(computer);    
     }
+    @Override
     public String toString(){
         StringBuilder str = new StringBuilder();
         str.append("Order " + orderNumber + " for " + customer.toString() + ")\n\n");
@@ -25,6 +26,7 @@ public class Order {
         String str2 = str.toString();
         return str2;
     }
+    @Override
     public boolean equals(Object o){
         Order temp = (Order) o;
       if(!(this.customer.equals(temp.customer))){

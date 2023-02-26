@@ -21,6 +21,7 @@ public class Computer {
         }
         return sum;
     }
+    @Override
     public String toString(){
         StringBuilder str = new StringBuilder();
         str.append( name + " (" + model + ")\n");
@@ -36,15 +37,16 @@ public class Computer {
         return str2;
 
     }
+    @Override
     public boolean equals(Object o){
-        if(o == this){
-            return true;
-        }
-        if(!(o instanceof Option)){
-            return false;
-        }
+        // if(o == this){
+        //     return true;
+        // }
+        // if(!(o instanceof Option)){
+        //     return false;
+        // }
 
-        Option c = (Option) o;
+        Computer c = (Computer) o;
         String one = c.toString();
         String two = this.toString();
         return (one.equals(two));
