@@ -40,25 +40,46 @@ public class MainWin extends JFrame {
         JMenuBar menubar = new JMenuBar();
         
         JMenu     file       = new JMenu("File");
-        JMenuItem anew       = new JMenuItem("New Game");
         JMenuItem quit       = new JMenuItem("Quit");
-        JMenu     help       = new JMenu("Help");
-        JMenuItem rules      = new JMenuItem("Rules");
-        JMenuItem about      = new JMenuItem("About");
+
+        JMenu     insert       = new JMenu("Insert");
+        JMenuItem customer     = new JMenuItem("Customer");
+        JMenuItem option       = new JMenuItem("Option");
+        JMenuItem computer     = new JMenuItem("Computer");
+
+        JMenu     view       = new JMenu("View");
+        JMenuItem customers     = new JMenuItem("Customers");
+        JMenuItem options       = new JMenuItem("Options");
+        JMenuItem computers     = new JMenuItem("Computers");
         
-        anew .addActionListener(event -> onNewGameClick());
-        quit .addActionListener(event -> onQuitClick());
-        rules.addActionListener(event -> onRulesClick());
+
+        JMenu     help       = new JMenu("Help");
+        JMenuItem about      = new JMenuItem("About");
+
+        quit.addActionListener(event -> onQuitClick());
         about.addActionListener(event -> onAboutClick());
+        customer.addActionListener(event -> onInsertCustomerClick());
+        option.addActionListener(event -> onInsertCustomerClick());
+        computer.addActionListener(event -> onInsertCustomerClick());
+        customers.addActionListener(event -> onViewClick(Record.CUSTOMER));
+        options.addActionListener(event -> onViewClick(Record.OPTION));
+        computers.addActionListener(event -> onViewClick(Record.COMPUTER));
 
         
-        file.add(anew);
         file.add(quit);
-        help.add(rules);
         help.add(about);
+        insert.add(customer);
+        insert.add(option);
+        insert.add(computer);
+        view.add(customers);
+        view.add(options);
+        view.add(computers);
         
         menubar.add(file);
+        menubar.add(insert);
+        menubar.add(view);
         menubar.add(help);
+      
         setJMenuBar(menubar);
         
         // ///////////// //////////////////////////////////////////////////////////
@@ -72,7 +93,7 @@ public class MainWin extends JFrame {
           anewB.setToolTipText("Create a new game, discarding any in progress");
           anewB.setBorder(null);
           toolbar.add(anewB);
-          anewB.addActionListener(event -> onNewGameClick());
+          anewB.addActionListener(event -> onNewStoreClick());
         
         // A "horizontal strut" is just a space of the specified pixel width
         toolbar.add(Box.createHorizontalStrut(25));
@@ -123,11 +144,11 @@ public class MainWin extends JFrame {
         
         
         // /////////////////////////// ////////////////////////////////////////////
-        // S T I C K S   D I S P L A Y
-        // Provide a text entry box to show the remaining sticks
-        sticks = new JLabel();
-        sticks.setFont(new Font("SansSerif", Font.BOLD, 18));
-        add(sticks, BorderLayout.CENTER);
+        // C O M P U T E R S   D I S P L A Y
+        // Provide a text entry box to show the remaining data
+        data = new JLabel();
+        data.setFont(new Font("SansSerif", Font.BOLD, 18));
+        add(data, BorderLayout.CENTER);
 
         // S T A T U S   B A R   D I S P L A Y ////////////////////////////////////
         // Provide a status bar for game messages
@@ -138,67 +159,72 @@ public class MainWin extends JFrame {
         setVisible(true);
         
         // Start a new game
-        onNewGameClick();
+        onNewStoreClick();
     }
     
     // Listeners
+    protected void onViewClick(Record temp) {     
+
+    }
+
+    protected void onInsertCustomerClick() {        
+
+    }
     
-    protected void onNewGameClick() {         // Create a new game
-        nim = new Nim();
-        setSticks();
-        msg.setFont(new JLabel().getFont());    // Reset to default font
+    protected void onNewStoreClick() {        
+        
     }
     
     protected void onButtonClick(int button) {  // Select 1, 2, or 3 sticks from pile
-        try {
-            // Catch the "impossible" out of sticks exception
-            nim.takeSticks(button);
-            setSticks();
-        } catch(Exception e) {
-            sticks.setText("FAIL: " + e.getMessage() + ", start new game");
-        }
+        // try {
+        //     // Catch the "impossible" out of sticks exception
+        //     nim.takeSticks(button);
+        //     setSticks();
+        // } catch(Exception e) {
+        //     sticks.setText("FAIL: " + e.getMessage() + ", start new game");
+        // }
     }
             
     protected void onComputerPlayerClick() {   // Enable / disable computer player
-        setSticks();
-        // Java Swing requires action to visually indicate enabled / disabled button
-        computerPlayer.setBorder(computerPlayer.isSelected() ? BorderFactory.createLineBorder(Color.black) : null);
+        // setSticks();
+        // // Java Swing requires action to visually indicate enabled / disabled button
+        // computerPlayer.setBorder(computerPlayer.isSelected() ? BorderFactory.createLineBorder(Color.black) : null);
     }
     protected void onRulesClick() {             // Show the rules
-        String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
-            "The two players alternate taking 1 to 3 sticks from the pile.\n" +
-            "The goal is to force your opponent to take the last stick (called misère rules).\n" +
-            "If the computer button is up, it's a two player game. If down, the computer is always Player 2.)";
-        JOptionPane.showMessageDialog(this, s, "The Rules of Nim", JOptionPane.PLAIN_MESSAGE);
+        // String s = "The Rules of Nim\n\nCopyright 2017-2023 by George F. Rice - CC BY 4.0\n\n" +
+        //     "The two players alternate taking 1 to 3 sticks from the pile.\n" +
+        //     "The goal is to force your opponent to take the last stick (called misère rules).\n" +
+        //     "If the computer button is up, it's a two player game. If down, the computer is always Player 2.)";
+        // JOptionPane.showMessageDialog(this, s, "The Rules of Nim", JOptionPane.PLAIN_MESSAGE);
     }
     protected void onAboutClick() {                 // Display About dialog
-        JLabel logo = null;
-        try {
-            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
-            logo = new JLabel(new ImageIcon(myPicture));
-        } catch(IOException e) {
-        }
+        // JLabel logo = null;
+        // try {
+        //     BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
+        //     logo = new JLabel(new ImageIcon(myPicture));
+        // } catch(IOException e) {
+        // }
         
-        JLabel title = new JLabel("<html>"
-          + "<p><font size=+4>Nim</font></p>"
-          + "<p>Version 1.4J</p>"
-           + "</html>",
-          SwingConstants.CENTER);
+        // JLabel title = new JLabel("<html>"
+        //   + "<p><font size=+4>Nim</font></p>"
+        //   + "<p>Version 1.4J</p>"
+        //    + "</html>",
+        //   SwingConstants.CENTER);
 
-        JLabel artists = new JLabel("<html>"
-          + "<br/><p>Copyright 2017-2023 by George F. Rice</p>"
-          + "<p>Licensed under Gnu GPL 3.0</p><br/>"
-          + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
-          + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
-          + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
-          + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
-          + "</html>");
+        // JLabel artists = new JLabel("<html>"
+        //   + "<br/><p>Copyright 2017-2023 by George F. Rice</p>"
+        //   + "<p>Licensed under Gnu GPL 3.0</p><br/>"
+        //   + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
+        //   + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
+        //   + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
+        //   + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
+        //   + "</html>");
           
-         JOptionPane.showMessageDialog(this, 
-             new Object[]{logo, title, artists},
-             "The Game of Nim",
-             JOptionPane.PLAIN_MESSAGE
-         );
+        //  JOptionPane.showMessageDialog(this, 
+        //      new Object[]{logo, title, artists},
+        //      "The Game of Nim",
+        //      JOptionPane.PLAIN_MESSAGE
+        //  );
      }
 
 /*
@@ -243,50 +269,50 @@ public class MainWin extends JFrame {
     protected void onQuitClick() {System.exit(0);}   // Exit the game
 
     private void setSticks() {              // Update display, robot move
-        // s collects the status message
-        String s = "";
+        // // s collects the status message
+        // String s = "";
         
-        // If the robot is enabled and it's their turn, move the robot
-        if(nim.sticksLeft() > 0) {
-            if(computerPlayer.isSelected() && nim.currentPlayer() == 2) {
-                int move = 1;
-                try {
-                    move = nim.optimalMove();
-                } catch(Exception e) {
-                    System.err.println("Invalid optimal move: " + e.getMessage());
-                }
-                s += "Robot plays " + move + ", ";
-                nim.takeSticks(move);
-            }
-        }
+        // // If the robot is enabled and it's their turn, move the robot
+        // if(nim.sticksLeft() > 0) {
+        //     if(computerPlayer.isSelected() && nim.currentPlayer() == 2) {
+        //         int move = 1;
+        //         try {
+        //             move = nim.optimalMove();
+        //         } catch(Exception e) {
+        //             System.err.println("Invalid optimal move: " + e.getMessage());
+        //         }
+        //         s += "Robot plays " + move + ", ";
+        //         nim.takeSticks(move);
+        //     }
+        // }
         
-        // Report who's turn it is, or (if all sticks gone) who won
+        // // Report who's turn it is, or (if all sticks gone) who won
         
-        if (nim.sticksLeft() > 0) {
-            s += "Player " + nim.currentPlayer() + "'s turn";
-        } else {
-            s += "Player " + nim.currentPlayer() +  " wins!";
-            msg.setFont(new Font("SansSerif", Font.BOLD, 18));
-        }
+        // if (nim.sticksLeft() > 0) {
+        //     s += "Player " + nim.currentPlayer() + "'s turn";
+        // } else {
+        //     s += "Player " + nim.currentPlayer() +  " wins!";
+        //     msg.setFont(new Font("SansSerif", Font.BOLD, 18));
+        // }
         
-        // Display the collected status on the status bar
-        msg.setText(s);
+        // // Display the collected status on the status bar
+        // msg.setText(s);
 
-        // Update the visual display of sticks
-        s = "";
-        for(int i=0; i<nim.sticksLeft(); ++i) s += ("| ");
-        s += "  (" + (nim.sticksLeft()) + " sticks)";
-        sticks.setText(s);
+        // // Update the visual display of sticks
+        // s = "";
+        // for(int i=0; i<nim.sticksLeft(); ++i) s += ("| ");
+        // s += "  (" + (nim.sticksLeft()) + " sticks)";
+        // sticks.setText(s);
 
-        // Set sensitivity of the human stick selectors so user can't make an illegal move
-        button1.setEnabled(nim.sticksLeft() > 0);
-        button2.setEnabled(nim.sticksLeft() > 1);
-        button3.setEnabled(nim.sticksLeft() > 2);
+        // // Set sensitivity of the human stick selectors so user can't make an illegal move
+        // button1.setEnabled(nim.sticksLeft() > 0);
+        // button2.setEnabled(nim.sticksLeft() > 1);
+        // button3.setEnabled(nim.sticksLeft() > 2);
     }
     
-    private Nim nim;
+  //  private Nim nim;
     
-    private JLabel sticks;                  // Display of sticks on game board
+    private JLabel data;                  // Display of sticks on game board
     private JLabel msg;                     // Status message display
     private JButton button1;                // Button to select 1 stick
     private JButton button2;                // Button to select 2 sticks
