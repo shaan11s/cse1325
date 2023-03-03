@@ -7,10 +7,18 @@ import javax.swing.JMenu;            // menu selection that offers another menu
 import javax.swing.JMenuItem;        // menu selection that does something
 import javax.swing.JToolBar;         // row of buttons under the menu
 import javax.swing.JButton;          // regular button
+import javax.swing.JComboBox;
 import javax.swing.JToggleButton;    // 2-state button
 import javax.swing.BorderFactory;    // manufacturers Border objects around buttons
 import javax.swing.Box;              // to create toolbar spacer
 import javax.swing.UIManager;        // to access default icons
+
+import store.Customer;
+import store.Option;
+import store.Store;
+import store.Computer;
+import store.Order;
+
 import javax.swing.JLabel;           // text or image holder
 import javax.swing.ImageIcon;        // holds a custom icon
 import javax.swing.SwingConstants;   // useful values for Swing method calls
@@ -28,6 +36,9 @@ import java.awt.Font;                // rich text in a JLabel or similar widget
 import java.awt.image.BufferedImage; // holds an image loaded from a file
 
 public class MainWin extends JFrame {
+
+  private Store store = new Store("Macrosoft");
+
     public MainWin(String title) {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,8 +70,8 @@ public class MainWin extends JFrame {
         quit.addActionListener(event -> onQuitClick());
         about.addActionListener(event -> onAboutClick());
         customer.addActionListener(event -> onInsertCustomerClick());
-        option.addActionListener(event -> onInsertCustomerClick());
-        computer.addActionListener(event -> onInsertCustomerClick());
+        option.addActionListener(event -> onInsertOptionClick());
+        computer.addActionListener(event -> onInsertComputerClick());
         customers.addActionListener(event -> onViewClick(Record.CUSTOMER));
         options.addActionListener(event -> onViewClick(Record.OPTION));
         computers.addActionListener(event -> onViewClick(Record.COMPUTER));
@@ -163,12 +174,52 @@ public class MainWin extends JFrame {
     }
     
     // Listeners
-    protected void onViewClick(Record temp) {     
+    protected void onViewClick(Record record) {     
 
     }
 
-    protected void onInsertCustomerClick() {        
+    protected void onInsertComputerClick() {     
+      String nameComputer = JOptionPane.showInputDialog("Enter Computer Name");
+      String model = JOptionPane.showInputDialog("Enter Model");
+      Computer computer = new Computer(nameComputer, model);
 
+      Object[] optionsArray = store.options();
+      JComboBox selectOption = new JComboBox<>(optionsArray);
+
+      //how do you select more than one option?
+      int selectedOption = JOptionPane.showConfirmDialog(null, selectOption);
+
+      int chosenOptionInt = (Integer)selectOption.getSelectedItem();
+      Object optionToAdd = optionsArray[chosenOptionInt];
+      computer.addOption((Option) optionToAdd);
+      store.add(computer);
+    }
+
+    protected void onInsertOptionClick() {     
+      //SHOULD BE DONE, AS CUSOMER CLICK
+      String option = JOptionPane.showInputDialog("Enter Option");
+      String cost = JOptionPane.showInputDialog("Enter Cost [$xx.xx]");
+      long costDouble = (long) (Double.parseDouble(cost) * 100);
+      //JOptionPane.showInputDialog(costDouble);
+      Option newOption = new Option(option, costDouble);
+      store.add(newOption);
+    }
+
+    protected void onInsertCustomerClick() {        
+    //DONE, WORKS 
+    //PROMPTS FOR CUSTOMER DATA, CHECKS IF VALID, ADDS IT TO STORES CUSTOMER LIST
+    //Show a window to user to get customer data
+    String name = JOptionPane.showInputDialog("Enter Customer Name");
+    String email = JOptionPane.showInputDialog("Enter Customer Email");
+    Customer newCustomer = null;
+    try{
+      newCustomer = new Customer(name, email);
+    }catch(Exception e){
+      if(email != null){
+        JOptionPane.showMessageDialog(null, "Invalid Email");
+      }
+    }
+    store.add(newCustomer);
     }
     
     protected void onNewStoreClick() {        
