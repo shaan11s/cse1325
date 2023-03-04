@@ -175,7 +175,154 @@ public class MainWin extends JFrame {
     
     // Listeners
     protected void onViewClick(Record record) {     
+          // Display VIEW of each list
 
+      if(Record.CUSTOMER.equals(record)){
+        Object[] forViewing = store.customers();
+
+        //here casting to customers arr
+        int length = forViewing.length;
+        Customer customers[] = new Customer[length];
+        for(int i=0; i<length; i++){
+          customers[i] = (Customer) forViewing[i];
+        }
+        //[DEBUG]System.out.println("\n\n" + customers[0] + "\n\n");
+
+        JLabel logo = null;
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
+            logo = new JLabel(new ImageIcon(myPicture));
+        } catch(IOException e) {
+        }
+        
+        JLabel title = new JLabel("<html>"
+          + "<p><font size=+2>Customers</font></p>"
+          +  "</br>"
+           + "</html>",
+          SwingConstants.CENTER);
+
+        JLabel data = new JLabel("<html>"
+          + "<br/><p>Current Customers</p>"
+          + "<p>UpToDate</p><br/>"
+          + "</html>");
+          
+          //Get all the objects or 'Customers' into a String for HTML format
+        StringBuilder s1 = new StringBuilder();
+        for(Customer i : customers){  
+        s1.append(i.toString());
+        s1.append("\n");
+        }
+
+        String customersLoaded = s1.toString();
+        //customersLoaded = customersLoaded.replaceAll("\n", "<br/>");
+        data.setText(("<html>" + customersLoaded.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>"));
+
+         JOptionPane.showMessageDialog(this, 
+             new Object[]{logo, title, data},
+             "Customers",
+             JOptionPane.PLAIN_MESSAGE
+         );
+      }
+
+
+      else if(Record.COMPUTER.equals(record)){
+        Object[] forViewing = store.computers();
+
+        //here casting to computers arr
+        int length = forViewing.length;
+        Computer computers[] = new Computer[length];
+        for(int i=0; i<length; i++){
+          computers[i] = (Computer) forViewing[i];
+        }
+        //[DEBUG]System.out.println("\n\n" + computers[0] + "\n\n");
+
+
+        JLabel logo = null;
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
+            logo = new JLabel(new ImageIcon(myPicture));
+        } catch(IOException e) {
+        }
+        
+        JLabel title = new JLabel("<html>"
+          + "<p><font size=+4>Computers</font></p>"
+          + "<p>Version 1.4J</p>"
+           + "</html>",
+          SwingConstants.CENTER);
+
+
+          JLabel data = new JLabel("<html>"
+          + "<br/><p>Current Computers</p>"
+          + "<p>UpToDate</p><br/>"
+          + "</html>");
+          
+          //Get all the objects or 'Customers' into a String for HTML format
+        StringBuilder s1 = new StringBuilder();
+        for(Computer i : computers){  
+        s1.append(i.toString());
+        s1.append("\n");
+        }
+
+        String computersLoaded = s1.toString();
+        //customersLoaded = customersLoaded.replaceAll("\n", "<br/>");
+        data.setText(("<html>" + computersLoaded.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>"));
+
+          
+         JOptionPane.showMessageDialog(this, 
+             new Object[]{logo, title, data},
+             "Computers",
+             JOptionPane.PLAIN_MESSAGE
+         );
+      }
+
+      else if(Record.OPTION.equals(record)){
+        Object[] forViewing = store.options();
+
+          //here casting to computers arr
+          int length = forViewing.length;
+          Option options[] = new Option[length];
+          for(int i=0; i<length; i++){
+            options[i] = (Option) forViewing[i];
+          }
+          //[DEBUG]System.out.println("\n\n" + options[0] + "\n\n");
+
+
+        JLabel logo = null;
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
+            logo = new JLabel(new ImageIcon(myPicture));
+        } catch(IOException e) {
+        }
+        
+        JLabel title = new JLabel("<html>"
+          + "<p><font size=+4>Options</font></p>"
+          + "<p>Version 1.4J</p>"
+           + "</html>",
+          SwingConstants.CENTER);
+
+          JLabel data = new JLabel("<html>"
+          + "<br/><p>Current Options</p>"
+          + "<p>UpToDate</p><br/>"
+          + "</html>");
+          
+          //Get all the objects or 'Customers' into a String for HTML format
+        StringBuilder s1 = new StringBuilder();
+        for(Option i : options){  
+        s1.append(i.toString());
+        s1.append("\n");
+        }
+
+        String optionsLoaded = s1.toString();
+        //customersLoaded = customersLoaded.replaceAll("\n", "<br/>");
+        data.setText(("<html>" + optionsLoaded.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>"));
+
+          
+         JOptionPane.showMessageDialog(this, 
+             new Object[]{logo, title, data},
+             "Options",
+             JOptionPane.PLAIN_MESSAGE
+         );
+      }
     }
 
     protected void onInsertComputerClick() {     
@@ -187,11 +334,21 @@ public class MainWin extends JFrame {
       JComboBox selectOption = new JComboBox<>(optionsArray);
 
       //how do you select more than one option?
-      int selectedOption = JOptionPane.showConfirmDialog(null, selectOption);
-
-      int chosenOptionInt = (Integer)selectOption.getSelectedItem();
-      Object optionToAdd = optionsArray[chosenOptionInt];
-      computer.addOption((Option) optionToAdd);
+      //change yes and no to add and done.
+      
+      int selectedOption = 0;
+      while(selectedOption != 1){
+        selectedOption = JOptionPane.showConfirmDialog(null, selectOption);
+        if(selectedOption == 1){
+          break;
+        }
+        ///[DEBUG}System.out.println("/n/n/nchosen is 1 " + selectedOption);
+        Object chosenOptionObj = selectOption.getSelectedItem();
+        //[DEBUG]System.out.println("/n/n/nchosen is 2 " + chosenOptionObj);
+        computer.addOption((Option) chosenOptionObj);
+        //[DEBUG]System.out.println("/n/n/nchosen is 3 " + computer);
+      }
+      //[DEBUG]System.out.println("/n/n/HERE IS THE ORDER" + computer);
       store.add(computer);
     }
 
