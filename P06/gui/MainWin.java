@@ -120,19 +120,19 @@ public class MainWin extends JFrame {
         // A "horizontal strut" is just a space of the specified pixel width
         toolbar.add(Box.createHorizontalStrut(25));
         
-        button4 = new JButton(new ImageIcon("gui/custo.png"));
+        button4 = new JButton(new ImageIcon("gui/customersView.png"));
           button4.setActionCommand("View Customers");
           button4.setToolTipText("View Customers");
           toolbar.add(button4);
           button4.addActionListener(event -> onViewClick(Record.CUSTOMER));
 
-        button5    = new JButton(new ImageIcon("gui/option.png"));
+        button5    = new JButton(new ImageIcon("gui/optionsView.png"));
           button5.setActionCommand("View Options");
           button5.setToolTipText("View Options");
           toolbar.add(button5);
           button5.addActionListener(event -> onViewClick(Record.OPTION));
 
-        button6 = new JButton(new ImageIcon("gui/computer.png"));
+        button6 = new JButton(new ImageIcon("gui/computerView.png"));
           button6.setActionCommand("View Computers");
           button6.setToolTipText("View Computers");
           toolbar.add(button6);
@@ -178,7 +178,7 @@ public class MainWin extends JFrame {
         setVisible(true);
         
         // Start a new game
-        onInsertCustomerClick();
+        //onInsertCustomerClick();
     }
     
     // Listeners
@@ -343,11 +343,17 @@ public class MainWin extends JFrame {
 
       //how do you select more than one option?
       //change yes and no to add and done.
-      
+
+      Object[] options = {"ADD",
+      "DONE"};
+
       int selectedOption = 0;
       while(selectedOption != 1){
-        selectedOption = JOptionPane.showConfirmDialog(null, selectOption);
-        if(selectedOption == 1){
+        //selectedOption = JOptionPane.showConfirmDialog(null, selectOption);
+        selectedOption = JOptionPane.showOptionDialog(null, selectOption,"Select Option",JOptionPane.YES_NO_OPTION,
+        JOptionPane.QUESTION_MESSAGE, null,options,options[0]);
+        //YES BUTTON TO ADD, NO BUTTON TO DONE, CANCEL DOES NOT WORK
+        if(selectedOption == 1 || selectedOption == 2){
           break;
         }
         ///[DEBUG}System.out.println("/n/n/nchosen is 1 " + selectedOption);
@@ -435,7 +441,13 @@ public class MainWin extends JFrame {
           + "<p>Logo by Clker-Free-Vector-Images , licensed under Pixabay License</p>"
           + "<p><font size=-2>https://pixabay.com/vectors/lcd-monitor-computer-32872/</font></p>"
           + "<p>Logo by Deans_Icons , licensed under Pixabay License</p>"
-          + "<p><font size=-2>https://pixabay.com/illustrations/customer-service-1433640//</font></p>"
+          + "<p><font size=-2>https://pixabay.com/illustrations/customer-service-1433640/</font></p>"
+          + "<p>Logo by janjf93 , licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/flat-design-symbol-icon-www-2126880/</font></p>"
+          + "<p>Logo by raphaelsilva , licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/gear-option-engine-config-icon-2935358/</font></p>"
+          + "<p>Logo by tuktukdesign , licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/icon-user-person-symbol-people-1633249/</font></p>"
           + "</html>");
           
          JOptionPane.showMessageDialog(this, 
