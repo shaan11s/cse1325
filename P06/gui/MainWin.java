@@ -96,48 +96,56 @@ public class MainWin extends JFrame {
         // ///////////// //////////////////////////////////////////////////////////
         // T O O L B A R
         // Add a toolbar to the PAGE_START region below the menu
-        JToolBar toolbar = new JToolBar("Nim Controls");
+        JToolBar toolbar = new JToolBar("Elsa Controls");
 
-        // Add a New Game stock icon
-        JButton anewB  = new JButton(UIManager.getIcon("FileView.fileIcon"));
-          anewB.setActionCommand("New Game");
-          anewB.setToolTipText("Create a new game, discarding any in progress");
-          anewB.setBorder(null);
-          toolbar.add(anewB);
-          anewB.addActionListener(event -> onNewStoreClick());
+
+        button1  = new JButton(new ImageIcon("gui/custo.png"));
+          button1.setActionCommand("Enter a new Customer");
+          button1.setToolTipText("Enter a new Customer");
+          toolbar.add(button1);
+          button1.addActionListener(event -> onInsertCustomerClick());
+
+        button2    = new JButton(new ImageIcon("gui/option.png"));
+          button2.setActionCommand("Enter a new Option");
+          button2.setToolTipText("Enter a new Option");
+          toolbar.add(button2);
+          button2.addActionListener(event -> onInsertOptionClick());
+
+        button3 = new JButton(new ImageIcon("gui/computer.png"));
+          button3.setActionCommand("Enter a new Computer");
+          button3.setToolTipText("Enter a new Computer");
+          toolbar.add(button3);
+          button3.addActionListener(event -> onInsertComputerClick());
         
         // A "horizontal strut" is just a space of the specified pixel width
         toolbar.add(Box.createHorizontalStrut(25));
         
-        // Create the 3 buttons using the icons provided
-        ImageIcon ii = new ImageIcon("button1.png");
-        button1  = new JButton(new ImageIcon("button1.png"));
-          button1.setActionCommand("Select one stick");
-          button1.setToolTipText("Select one stick");
-          toolbar.add(button1);
-          button1.addActionListener(event -> onButtonClick(1));
+        button4 = new JButton(new ImageIcon("gui/custo.png"));
+          button4.setActionCommand("View Customers");
+          button4.setToolTipText("View Customers");
+          toolbar.add(button4);
+          button4.addActionListener(event -> onViewClick(Record.CUSTOMER));
 
-        button2    = new JButton(new ImageIcon("button2.png"));
-          button2.setActionCommand("Select two sticks");
-          button2.setToolTipText("Select two sticks");
-          toolbar.add(button2);
-          button2.addActionListener(event -> onButtonClick(2));
+        button5    = new JButton(new ImageIcon("gui/option.png"));
+          button5.setActionCommand("View Options");
+          button5.setToolTipText("View Options");
+          toolbar.add(button5);
+          button5.addActionListener(event -> onViewClick(Record.OPTION));
 
-        button3 = new JButton(new ImageIcon("button3.png"));
-          button3.setActionCommand("Select three sticks");
-          button3.setToolTipText("Select three sticks");
-          toolbar.add(button3);
-          button3.addActionListener(event -> onButtonClick(3));
+        button6 = new JButton(new ImageIcon("gui/computer.png"));
+          button6.setActionCommand("View Computers");
+          button6.setToolTipText("View Computers");
+          toolbar.add(button6);
+          button6.addActionListener(event -> onViewClick(Record.COMPUTER));
+
         
-        toolbar.add(Box.createHorizontalStrut(25));
-        
-        // Create a toggle button to enable or disable the computer player
-        computerPlayer = new JToggleButton(new ImageIcon("freepik_robot.png"));
-          computerPlayer.setActionCommand("Enable computer player");
-          computerPlayer.setToolTipText("Enable computer to be Player 2");
-          computerPlayer.setBorder(null);
-          toolbar.add(computerPlayer);
-          computerPlayer.addActionListener(event -> onComputerPlayerClick());
+        // // Create a toggle button to enable or disable the computer player
+        // computerPlayer = new JToggleButton(new ImageIcon("freepik_robot.png"));
+        //   computerPlayer.setActionCommand("Enable computer player");
+        //   computerPlayer.setToolTipText("Enable computer to be Player 2");
+        //   computerPlayer.setBorder(null);
+        //   toolbar.add(computerPlayer);
+        //   computerPlayer.addActionListener(event -> onComputerPlayerClick());
 
         // "Horizontal glue" expands as much as possible, pushing the "X" to the right
         toolbar.add(Box.createHorizontalGlue());
@@ -170,7 +178,7 @@ public class MainWin extends JFrame {
         setVisible(true);
         
         // Start a new game
-        onNewStoreClick();
+        onInsertCustomerClick();
     }
     
     // Listeners
@@ -406,33 +414,35 @@ public class MainWin extends JFrame {
         // JOptionPane.showMessageDialog(this, s, "The Rules of Nim", JOptionPane.PLAIN_MESSAGE);
     }
     protected void onAboutClick() {                 // Display About dialog
-        // JLabel logo = null;
-        // try {
-        //     BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
-        //     logo = new JLabel(new ImageIcon(myPicture));
-        // } catch(IOException e) {
-        // }
+        JLabel logo = null;
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
+            logo = new JLabel(new ImageIcon(myPicture));
+        } catch(IOException e) {
+        }
         
-        // JLabel title = new JLabel("<html>"
-        //   + "<p><font size=+4>Nim</font></p>"
-        //   + "<p>Version 1.4J</p>"
-        //    + "</html>",
-        //   SwingConstants.CENTER);
+        JLabel title = new JLabel("<html>"
+          + "<p><font size=+4>ELSA</font></p>"
+          + "<p>Version 0.2</p>"
+           + "</html>",
+          SwingConstants.CENTER);
 
-        // JLabel artists = new JLabel("<html>"
-        //   + "<br/><p>Copyright 2017-2023 by George F. Rice</p>"
-        //   + "<p>Licensed under Gnu GPL 3.0</p><br/>"
-        //   + "<p>Logo by M0tty, licensed under CC BY-SA 3.0</p>"
-        //   + "<p><font size=-2>https://commons.wikimedia.org/wiki/File:Pyramidal_matches.svg</font></p>"
-        //   + "<p>Robot by FreePik.com, licensed for personal</p><p>and commercial purposes with attribution</p>"
-        //   + "<p><font size=-2>https://www.freepik.com/free-vector/grey-robot-silhouettes_714902.htm</font></p>"
-        //   + "</html>");
+        JLabel artists = new JLabel("<html>"
+          + "<br/><p>Copyright 2017-2023 by Shaan Sekhon</p>"
+          + "<p>Licensed under Gnu GPL 3.0</p><br/>"
+          + "<p>Logo by raphaelsilva , licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/gear-option-engine-config-icon-2160908/</font></p>"
+          + "<p>Logo by Clker-Free-Vector-Images , licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/lcd-monitor-computer-32872/</font></p>"
+          + "<p>Logo by Deans_Icons , licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/illustrations/customer-service-1433640//</font></p>"
+          + "</html>");
           
-        //  JOptionPane.showMessageDialog(this, 
-        //      new Object[]{logo, title, artists},
-        //      "The Game of Nim",
-        //      JOptionPane.PLAIN_MESSAGE
-        //  );
+         JOptionPane.showMessageDialog(this, 
+             new Object[]{logo, title, artists},
+             "ELSA",
+             JOptionPane.PLAIN_MESSAGE
+         );
      }
 
 /*
@@ -525,6 +535,9 @@ public class MainWin extends JFrame {
     private JButton button1;                // Button to select 1 stick
     private JButton button2;                // Button to select 2 sticks
     private JButton button3;                // Button to select 3 sticks
+    private JButton button4;                // Button to select 1 stick
+    private JButton button5;                // Button to select 2 sticks
+    private JButton button6;                // Button to select 3 sticks
     private JToggleButton computerPlayer;   // Button to enable robot
 
 }
