@@ -40,12 +40,12 @@ public class Computer {
     }
     @Override
     public boolean equals(Object o){
-        // if(o == this){
-        //     return true;
-        // }
-        // if(!(o instanceof Option)){
-        //     return false;
-        // }
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof Computer)){
+            return false;
+        }
 
         Computer c = (Computer) o;
         String one = c.toString();

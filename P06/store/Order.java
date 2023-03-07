@@ -29,6 +29,13 @@ public class Order {
     }
     @Override
     public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        if(!(o instanceof Order)){
+            return false;
+        }
+
         Order temp = (Order) o;
       if(!(this.customer.equals(temp.customer))){
           return false;
