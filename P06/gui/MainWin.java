@@ -358,6 +358,7 @@ public class MainWin extends JFrame {
         }
         ///[DEBUG}System.out.println("/n/n/nchosen is 1 " + selectedOption);
         Object chosenOptionObj = selectOption.getSelectedItem();
+
         //[DEBUG]System.out.println("/n/n/nchosen is 2 " + chosenOptionObj);
         computer.addOption((Option) chosenOptionObj);
         //[DEBUG]System.out.println("/n/n/nchosen is 3 " + computer);
