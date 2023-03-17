@@ -1,6 +1,7 @@
 package store;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Store {
@@ -13,7 +14,17 @@ public class Store {
     public Store(BufferedReader br){
 
     }
-    public void Save(BufferedWriter bw){
+    public void Save(BufferedWriter bw) throws IOException{
+        bw.write(name + '\n');
+
+        bw.write("" + options.size() + '\n');
+        for(Option option : options) option.save(bw);
+
+        bw.write("" + computers.size() + '\n');
+        for(Computer computers : computers) computers.save(bw);
+
+        bw.write("" + customers.size() + '\n');
+        for(Customer customers : customers) customers.save(bw);
 
     }
     
