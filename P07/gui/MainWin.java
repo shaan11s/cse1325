@@ -1,6 +1,7 @@
 package gui;
 import javax.swing.JFrame;           // for main window
 import javax.swing.JOptionPane;      // for standard dialogs
+import javax.swing.JPanel;
 // import javax.swing.JDialog;          // for custom dialogs (for alternate About dialog)
 import javax.swing.JMenuBar;         // row of menu selections
 import javax.swing.JMenu;            // menu selection that offers another menu
@@ -12,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JToggleButton;    // 2-state button
 import javax.swing.BorderFactory;    // manufacturers Border objects around buttons
 import javax.swing.Box;              // to create toolbar spacer
+import javax.swing.BoxLayout;
 import javax.swing.UIManager;        // to access default icons
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -166,7 +168,7 @@ public class MainWin extends JFrame {
           toolbar.add(button4);
           button4.addActionListener(event -> onViewClick(Record.CUSTOMER));
 
-        button5    = new JButton(new ImageIcon("gui/optionsView.png"));
+         button5    = new JButton(new ImageIcon("gui/optionsView.png"));
           button5.setActionCommand("View Options");
           button5.setToolTipText("View Options");
           toolbar.add(button5);
@@ -177,6 +179,54 @@ public class MainWin extends JFrame {
           button6.setToolTipText("View Computers");
           toolbar.add(button6);
           button6.addActionListener(event -> onViewClick(Record.COMPUTER));
+
+          toolbar.add(Box.createHorizontalStrut(25));
+        
+         button7 = new JButton(new ImageIcon("gui/new.png"));
+          button7.setActionCommand("New Store");
+          button7.setToolTipText("New Store");
+          toolbar.add(button7);
+          button7.addActionListener(event -> {
+            try {
+              onNewClick();
+            } catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+          });
+
+         button8  = new JButton(new ImageIcon("gui/open.png"));
+          button8.setActionCommand("Open Store");
+          button8.setToolTipText("Open Store");
+          toolbar.add(button8);
+          button8.addActionListener(event -> onOpenClick());
+
+         button9 = new JButton(new ImageIcon("gui/save.png"));
+          button9.setActionCommand("Save Store");
+          button9.setToolTipText("Save Store");
+          toolbar.add(button9);
+          button9.addActionListener(event -> {
+            try {
+              onSaveClick();
+            } catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+          });
+
+         button10 = new JButton(new ImageIcon("gui/saveAs.png"));
+          button10.setActionCommand("Save As Store");
+          button10.setToolTipText("Save As Store");
+          toolbar.add(button10);
+          button10.addActionListener(event -> {
+            try {
+              onSaveAsClick();
+            } catch (IOException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+          });
+
 
         
         // // Create a toggle button to enable or disable the computer player
@@ -526,7 +576,7 @@ public class MainWin extends JFrame {
     protected void onAboutClick() {                 // Display About dialog
         JLabel logo = null;
         try {
-            BufferedImage myPicture = ImageIO.read(new File("128px-Pyramidal_matches.png"));
+            BufferedImage myPicture = ImageIO.read(new File("gui/save.png"));
             logo = new JLabel(new ImageIcon(myPicture));
         } catch(IOException e) {
         }
@@ -540,6 +590,8 @@ public class MainWin extends JFrame {
         JLabel artists = new JLabel("<html>"
           + "<br/><p>Copyright 2017-2023 by Shaan Sekhon</p>"
           + "<p>Licensed under Gnu GPL 3.0</p><br/>"
+          + "<p>Logo by GDJ ,, licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/cranium-head-human-male-man-2099120/</font></p>"
           + "<p>Logo by raphaelsilva , licensed under Pixabay License</p>"
           + "<p><font size=-2>https://pixabay.com/vectors/gear-option-engine-config-icon-2160908/</font></p>"
           + "<p>Logo by Clker-Free-Vector-Images , licensed under Pixabay License</p>"
@@ -552,10 +604,23 @@ public class MainWin extends JFrame {
           + "<p><font size=-2>https://pixabay.com/vectors/gear-option-engine-config-icon-2935358/</font></p>"
           + "<p>Logo by tuktukdesign , licensed under Pixabay License</p>"
           + "<p><font size=-2>https://pixabay.com/vectors/icon-user-person-symbol-people-1633249/</font></p>"
+          + "<p>Logo by Clker-Free-Vector-Images licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=309156</font></p>"
+          + "<p>Logo by Clker-Free-Vector-Images licensed under Pixabay License</p>"
+          + "<p><font size=-2>ttps://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=309052</font></p>"
+          + "<p>Logo by Clker-Free-Vector-Images licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1293738</font></p>"
+          + "<p>Logo by OpenClipart-Vectors licensed under Pixabay License</p>"
+          + "<p><font size=-2>https://pixabay.com/vectors/icon-user-person-symbol-people-1633249/</font></p>"
           + "</html>");
           
+          //JPanel Canvas = new JPanel();
+
+          //Canvas.setLayout(new BoxLayout(Canvas, BoxLayout.PAGE_AXIS));
+          //Canvas.setBorder(BorderFactory.createTitledBorder("Elsa"));
+          
          JOptionPane.showMessageDialog(this, 
-             new Object[]{logo, title, artists},
+             new Object[]{new Canvas(), title, artists},
              "ELSA",
              JOptionPane.PLAIN_MESSAGE
          );
@@ -654,6 +719,10 @@ public class MainWin extends JFrame {
     private JButton button4;                // Button to select 1 stick
     private JButton button5;                // Button to select 2 sticks
     private JButton button6;                // Button to select 3 sticks
+    private JButton button7;                // Button to select 3 sticks
+    private JButton button8;                // Button to select 3 sticks
+    private JButton button9;                // Button to select 3 sticks
+    private JButton button10;                // Button to select 3 sticks
     private JToggleButton computerPlayer;   // Button to enable robot
     private File filename;
 

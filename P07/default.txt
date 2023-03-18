@@ -12,6 +12,8 @@ SSD(128GB)
 4999
 RETINA
 29999
-1
+2
 Leao
 Leao@ACM.org
+Cristiano
+CR7@manu.org
