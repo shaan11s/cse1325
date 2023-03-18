@@ -51,7 +51,7 @@ public class MainWin extends JFrame {
     public MainWin(String title) {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 200);
+        setSize(600, 200);
         
         // /////// ////////////////////////////////////////////////////////////////
         // M E N U
@@ -574,12 +574,12 @@ public class MainWin extends JFrame {
         // JOptionPane.showMessageDialog(this, s, "The Rules of Nim", JOptionPane.PLAIN_MESSAGE);
     }
     protected void onAboutClick() {                 // Display About dialog
-        JLabel logo = null;
-        try {
-            BufferedImage myPicture = ImageIO.read(new File("gui/save.png"));
-            logo = new JLabel(new ImageIcon(myPicture));
-        } catch(IOException e) {
-        }
+        // JLabel logo = null;
+        // try {
+        //     BufferedImage myPicture = ImageIO.read(new File("gui/save.png"));
+        //     logo = new JLabel(new ImageIcon(myPicture));
+        // } catch(IOException e) {
+        // }
         
         JLabel title = new JLabel("<html>"
           + "<p><font size=+4>ELSA</font></p>"

@@ -19,7 +19,7 @@ public class Canvas extends JPanel {
     Image image;
     Canvas(){
         image = new ImageIcon("gui/head.png").getImage();
-        this.setPreferredSize(new Dimension(500,500));
+        this.setPreferredSize(new Dimension(500,400));
     }
 
     @Override
@@ -27,21 +27,26 @@ public class Canvas extends JPanel {
         super.paintComponent(graphics);
         Graphics2D g = (Graphics2D) graphics.create();
 
-        g.setPaint(Color.pink);
+        //Draw Rectangles
+        int x1 = 350;
+        int y1 = 50;
         g.setStroke(new BasicStroke(5));
-        g.drawRect(350,50,100,100);
-        g.drawRect(300,100,100,100);
-        g.drawRect(250,150,100,100);
-        g.drawRect(200,200,100,100);
-        g.drawRect(150,250,100,100);
-        g.drawRect(100,300,100,100);
+        for(int i=0; i<10; i++){
+            if(i<1){g.setPaint(Color.pink);}
+            else{g.setPaint(Color.orange);}
+            g.drawRect(x1,y1,100,100);
+            x1-=20;
+            y1+=20;
+        }
 
+        //Draw Slogan
         g.setPaint(Color.black);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         int x=  (this.getWidth() / 4);
             int y = (this.getHeight() / 2);
-        g.drawString("Unlock Your Potential", x+5, y+90);
+        g.drawString("Unlock Your Potential", x+7, y+140);
 
+        //Draw Image
         g.drawImage(image, 400, 180,null );
 
     }
