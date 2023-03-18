@@ -487,8 +487,11 @@ public class MainWin extends JFrame {
     }
 
     protected void onInsertComputerClick() {     
-      String nameComputer = JOptionPane.showInputDialog("Enter Computer Name");
-      String model = JOptionPane.showInputDialog("Enter Model");
+      //ALL BUT OPTIONS DROP DOWN VALIDATED
+      String nameComputer = JOptionPane.showInputDialog("Enter Computer Name", "Computer");
+      if(nameComputer != null && !nameComputer.equals("Computer")){
+      String model = JOptionPane.showInputDialog("Enter Model", "Model");
+      if(model != null && !model.equals("Model")){
       Computer computer = new Computer(nameComputer, model);
 
       Object[] optionsArray = store.options();
@@ -518,24 +521,27 @@ public class MainWin extends JFrame {
       }
       //[DEBUG]System.out.println("/n/n/HERE IS THE ORDER" + computer);
       store.add(computer);
+        }
+      }
     }
-
     protected void onInsertOptionClick() {     
-      //SHOULD BE DONE, AS CUSOMER CLICK
-      String option = JOptionPane.showInputDialog("Enter Option");
+      //VALIDATED
+      String option = JOptionPane.showInputDialog("Enter Option", "Option");
+      if(option !=null && !option.equals("Option")){
       String cost = JOptionPane.showInputDialog("Enter Cost [$xx.xx]");
       long costDouble = (long) (Double.parseDouble(cost) * 100);
       //JOptionPane.showInputDialog(costDouble);
       Option newOption = new Option(option, costDouble);
       store.add(newOption);
+      }
     }
 
     protected void onInsertCustomerClick() {        
-    //DONE, WORKS 
-    //PROMPTS FOR CUSTOMER DATA, CHECKS IF VALID, ADDS IT TO STORES CUSTOMER LIST
-    //Show a window to user to get customer data
-    String name = JOptionPane.showInputDialog("Enter Customer Name");
-    String email = JOptionPane.showInputDialog("Enter Customer Email");
+    //VALIDATED
+    String name = JOptionPane.showInputDialog("Enter Customer Name", "Name");
+      if(name != null && !name.equals("Name")){
+    String email = JOptionPane.showInputDialog("Enter Customer Email", "Email");
+        if(email!=null && !email.equals("Email")){
     Customer newCustomer = null;
     try{
       newCustomer = new Customer(name, email);
@@ -545,10 +551,11 @@ public class MainWin extends JFrame {
       }
     }
     store.add(newCustomer);
-    }
-    
+     }
+   }
+  }
+
     protected void onNewStoreClick() {        
-        
     }
     
     protected void onButtonClick(int button) {  // Select 1, 2, or 3 sticks from pile
@@ -588,7 +595,7 @@ public class MainWin extends JFrame {
           SwingConstants.CENTER);
 
         JLabel artists = new JLabel("<html>"
-          + "<br/><p>Copyright 2017-2023 by Shaan Sekhon</p>"
+          + "<br/><p>Copyright 2023 by Shaan Sekhon</p>"
           + "<p>Licensed under Gnu GPL 3.0</p><br/>"
           + "<p>Logo by GDJ ,, licensed under Pixabay License</p>"
           + "<p><font size=-2>https://pixabay.com/vectors/cranium-head-human-male-man-2099120/</font></p>"
