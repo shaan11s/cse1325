@@ -11,8 +11,22 @@ public class Store {
     public String name() {
         return this.name;
     }
-    public Store(BufferedReader br){
+    public Store(BufferedReader br) throws IOException{
+        //get name of store
+        this.name = br.readLine();
 
+        //get number of options
+        int size = Integer.parseInt(br.readLine());
+        while(size-- > 0) options.add(new Option(br));
+        //get number of computers
+        size = Integer.parseInt(br.readLine());
+        while(size-- > 0) computers.add(new Computer(br));
+        //get number of customrs
+        size = Integer.parseInt(br.readLine());
+        while(size-- > 0) customers.add(new Customer(br));
+
+        //read that many options
+        //read the number on next line, repeat for that array.
     }
     public void Save(BufferedWriter bw) throws IOException{
         bw.write(name + '\n');

@@ -13,8 +13,11 @@ public class Computer {
         this.name = name;
         this.model = model;
     }
-    public Computer(BufferedReader br){
-
+    public Computer(BufferedReader br) throws IOException{
+        this.name = br.readLine();
+        this.model = br.readLine();
+        int size = Integer.parseInt(br.readLine());
+        while(size-- > 0) options.add(new Option(br));
     }
     public void save(BufferedWriter bw) throws IOException{
         bw.write(name + '\n');

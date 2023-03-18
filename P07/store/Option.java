@@ -18,8 +18,9 @@ public class Option {
         this.cost = cost;
     
     }
-    public Option(BufferedReader br){
-
+    public Option(BufferedReader br) throws IOException{
+        this.name = br.readLine();
+        this.cost = Long.parseLong(br.readLine());
     }
     public void save(BufferedWriter bw) throws IOException{
         bw.write(name + '\n');

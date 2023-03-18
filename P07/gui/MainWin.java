@@ -27,9 +27,11 @@ import javax.swing.SwingConstants;   // useful values for Swing method calls
 
 import javax.imageio.ImageIO;        // loads an image from a file
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;                 // opens a file
 import java.io.FileFilter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;          // reports an error reading from a file
 
@@ -77,10 +79,31 @@ public class MainWin extends JFrame {
         JMenuItem about      = new JMenuItem("About");
 
         quit.addActionListener(event -> onQuitClick());
-        newStore.addActionListener(event -> onNewClick());
+        newStore.addActionListener(event -> {
+          try {
+            onNewClick();
+          } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        });
         openStore.addActionListener(event -> onOpenClick());
-        saveStore.addActionListener(event -> onSaveClick());
-        saveStoreAs.addActionListener(event -> onSaveAsClick());
+        saveStore.addActionListener(event -> {
+          try {
+            onSaveClick();
+          } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        });
+        saveStoreAs.addActionListener(event -> {
+          try {
+            onSaveAsClick();
+          } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        });
         about.addActionListener(event -> onAboutClick());
         customer.addActionListener(event -> onInsertCustomerClick());
         option.addActionListener(event -> onInsertOptionClick());
@@ -200,7 +223,7 @@ public class MainWin extends JFrame {
     
     // Listeners
 
-    protected void onNewClick() {        
+    protected void onNewClick() throws IOException {        
       //WIPE EXISTING STORE WITH NEW ONE?
       //maybe have a dialogue like "have you saved yet?" then "Enter new store name"
       //"Let user pick name"
@@ -216,15 +239,17 @@ public class MainWin extends JFrame {
         if(filename == null){
           filename = new File("default.txt");
         }
-        try (BufferedWriter br = new BufferedWriter(new FileWriter(filename.getName()))){
-          br.write("TEST\n");
-          //br.close();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename.getName()))){
+
+          store.Save(bw);
+          //bw.write("TEST\n");
+          //bw.close();
         } catch (Exception e) {
           System.err.println("Failed to write" + e );
         }
         //call save method from store object
     }
-    protected void onSaveAsClick() {        
+    protected void onSaveAsClick() throws IOException {        
         final JFileChooser fc = new JFileChooser(filename);
         FileNameExtensionFilter storeFiles = new FileNameExtensionFilter("Store Files", "txt");
         fc.addChoosableFileFilter(storeFiles);
@@ -239,8 +264,26 @@ public class MainWin extends JFrame {
         }
     }
     protected void onOpenClick() {        
-        //open file for reading and load it
+        final JFileChooser fc = new JFileChooser();
+        // FileNameExtensionFilter storeFiles = new FileNameExtensionFilter("Store Files", "txt");
+        // fc.addChoosableFileFilter(storeFiles);
+        // fc.setFileFilter(storeFiles);
+        int result = fc.showOpenDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION){
+          filename = fc.getSelectedFile();
+          if(!filename.getAbsolutePath().endsWith(".txt"))
+          filename = new File(filename.getAbsolutePath() + ".txt");
     }
+
+    if(filename != null){
+      //do something
+    }
+    try (BufferedReader br = new BufferedReader(new FileReader(filename.getName()))){
+      store = new Store(br);
+    } catch (Exception e) {
+      System.err.println("Failed to read" + e );
+    }
+  }
 
     protected void onViewClick(Record record) {     
           // Display VIEW of each list
