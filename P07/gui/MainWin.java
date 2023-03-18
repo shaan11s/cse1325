@@ -213,10 +213,12 @@ public class MainWin extends JFrame {
         store = new Store(newStoreName);
     }
     protected void onSaveClick() throws IOException {        
-        //open filename. if filename == NULL, save to default file
-        try (BufferedWriter br = new BufferedWriter(new FileWriter(filename))){
+        if(filename == null){
+          filename = new File("default.txt");
+        }
+        try (BufferedWriter br = new BufferedWriter(new FileWriter(filename.getName()))){
           br.write("TEST\n");
-          br.close();
+          //br.close();
         } catch (Exception e) {
           System.err.println("Failed to write" + e );
         }
