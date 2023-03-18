@@ -8,10 +8,12 @@ import javax.swing.JMenuItem;        // menu selection that does something
 import javax.swing.JToolBar;         // row of buttons under the menu
 import javax.swing.JButton;          // regular button
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JToggleButton;    // 2-state button
 import javax.swing.BorderFactory;    // manufacturers Border objects around buttons
 import javax.swing.Box;              // to create toolbar spacer
 import javax.swing.UIManager;        // to access default icons
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import store.Customer;
 import store.Option;
@@ -25,7 +27,10 @@ import javax.swing.SwingConstants;   // useful values for Swing method calls
 
 import javax.imageio.ImageIO;        // loads an image from a file
 
+import java.io.BufferedWriter;
 import java.io.File;                 // opens a file
+import java.io.FileFilter;
+import java.io.FileWriter;
 import java.io.IOException;          // reports an error reading from a file
 
 import java.awt.BorderLayout;        // layout manager for main window
@@ -50,15 +55,19 @@ public class MainWin extends JFrame {
 
         JMenuBar menubar = new JMenuBar();
         
-        JMenu     file       = new JMenu("File");
-        JMenuItem quit       = new JMenuItem("Quit");
+        JMenu     file         = new JMenu("File");
+        JMenuItem newStore     = new JMenuItem("New Store");
+        JMenuItem openStore    = new JMenuItem("Open Store");
+        JMenuItem saveStore    = new JMenuItem("Save Store");
+        JMenuItem saveStoreAs  = new JMenuItem("Save Store As");
+        JMenuItem quit         = new JMenuItem("Quit");
 
         JMenu     insert       = new JMenu("Insert");
         JMenuItem customer     = new JMenuItem("Customer");
         JMenuItem option       = new JMenuItem("Option");
         JMenuItem computer     = new JMenuItem("Computer");
 
-        JMenu     view       = new JMenu("View");
+        JMenu     view          = new JMenu("View");
         JMenuItem customers     = new JMenuItem("Customers");
         JMenuItem options       = new JMenuItem("Options");
         JMenuItem computers     = new JMenuItem("Computers");
@@ -68,6 +77,10 @@ public class MainWin extends JFrame {
         JMenuItem about      = new JMenuItem("About");
 
         quit.addActionListener(event -> onQuitClick());
+        newStore.addActionListener(event -> onNewClick());
+        openStore.addActionListener(event -> onOpenClick());
+        saveStore.addActionListener(event -> onSaveClick());
+        saveStoreAs.addActionListener(event -> onSaveAsClick());
         about.addActionListener(event -> onAboutClick());
         customer.addActionListener(event -> onInsertCustomerClick());
         option.addActionListener(event -> onInsertOptionClick());
@@ -77,6 +90,10 @@ public class MainWin extends JFrame {
         computers.addActionListener(event -> onViewClick(Record.COMPUTER));
 
         
+        file.add(newStore);
+        file.add(openStore);
+        file.add(saveStore);
+        file.add(saveStoreAs);
         file.add(quit);
         help.add(about);
         insert.add(customer);
@@ -182,6 +199,47 @@ public class MainWin extends JFrame {
     }
     
     // Listeners
+
+    protected void onNewClick() {        
+      //WIPE EXISTING STORE WITH NEW ONE?
+      //maybe have a dialogue like "have you saved yet?" then "Enter new store name"
+      //"Let user pick name"
+      int dialogButton = JOptionPane.YES_NO_OPTION;
+      int dialogResult = JOptionPane.showConfirmDialog (null, "Would You Like to Save First?","Warning",dialogButton);
+        if(dialogResult == JOptionPane.YES_OPTION){
+        onSaveClick();
+        }
+        String newStoreName = JOptionPane.showInputDialog("Enter Store Name");
+        store = new Store(newStoreName);
+    }
+    protected void onSaveClick() throws IOException {        
+        //open filename. if filename == NULL, save to default file
+        try (BufferedWriter br = new BufferedWriter(new FileWriter(filename))){
+          br.write("TEST\n");
+          br.close();
+        } catch (Exception e) {
+          System.err.println("Failed to write" + e );
+        }
+        //call save method from store object
+    }
+    protected void onSaveAsClick() {        
+        final JFileChooser fc = new JFileChooser(filename);
+        FileNameExtensionFilter storeFiles = new FileNameExtensionFilter("Store Files", "txt");
+        fc.addChoosableFileFilter(storeFiles);
+        fc.setFileFilter(storeFiles);
+
+        int result = fc.showSaveDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION){
+          filename = fc.getSelectedFile();
+          if(!filename.getAbsolutePath().endsWith(".txt"))
+          filename = new File(filename.getAbsolutePath() + ".txt");
+          onSaveClick();
+        }
+    }
+    protected void onOpenClick() {        
+        //open file for reading and load it
+    }
+
     protected void onViewClick(Record record) {     
           // Display VIEW of each list
 
@@ -339,7 +397,7 @@ public class MainWin extends JFrame {
       Computer computer = new Computer(nameComputer, model);
 
       Object[] optionsArray = store.options();
-      JComboBox selectOption = new JComboBox<>(optionsArray);
+      JComboBox<Object> selectOption = new JComboBox<>(optionsArray);
 
       //how do you select more than one option?
       //change yes and no to add and done.
@@ -552,5 +610,6 @@ public class MainWin extends JFrame {
     private JButton button5;                // Button to select 2 sticks
     private JButton button6;                // Button to select 3 sticks
     private JToggleButton computerPlayer;   // Button to enable robot
+    private File filename;
 
 }
