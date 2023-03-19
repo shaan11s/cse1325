@@ -11,6 +11,10 @@ Pirate Configuration
 1
 Waterproof Case
 4500
-1
+3
 Davy Jones
 Jones@FlyingDutchman.pir
+Jack Sparrow
+jack@tortuga.sea
+Admiral English Guy
+AdmiralE@UK.GOV

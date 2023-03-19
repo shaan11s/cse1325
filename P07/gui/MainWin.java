@@ -52,7 +52,7 @@ public class MainWin extends JFrame {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 200);
-        
+        setLocationRelativeTo(null);
         // /////// ////////////////////////////////////////////////////////////////
         // M E N U
         // Add a menu bar to the PAGE_START area of the Border Layout
@@ -252,7 +252,7 @@ public class MainWin extends JFrame {
         getContentPane().add(toolbar, BorderLayout.PAGE_START);
         
         
-        // /////////////////////////// ////////////////////////////////////////////
+        // ///////////////////////////////////////////////////////////////////////
         // C O M P U T E R S   D I S P L A Y
         // Provide a text entry box to show the remaining data
         data = new JLabel();
