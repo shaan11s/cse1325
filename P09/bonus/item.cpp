@@ -20,5 +20,9 @@
         return os;
     }
     std::istream& operator >> (std::istream& is, Item& Item){
+        getline(is,Item._name);
+        std::string temp;
+        getline(is,temp);
+        Item._price = stoi(temp); 
         return is;
     }
