@@ -14,4 +14,3 @@ int main(int argc, char *argv[]) {
     new_machine.buy(0);
      return 0;
 }
-
