@@ -3,10 +3,6 @@
 #include <string>
 #include "item.h"
 
-void add(std::string name, int price);
-void buy(int index);
-std::string menu();
-
 class vending_machine{
 
     friend std::ostream& operator << (std::ostream& os, const vending_machine& vending);
@@ -18,8 +14,6 @@ class vending_machine{
     void add(std::string name, int price);
 
     void buy(int index);
-
-    std::string menu();
 
 };
 

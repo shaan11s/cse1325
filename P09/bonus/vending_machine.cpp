@@ -21,6 +21,10 @@
 
     std::ostream& operator << (std::ostream& os, const vending_machine& vending){
 
+        //VECTOR SIZE IS 0
+        //referencing my existing 'new_vending' 
+        //maybe because vector is private in header? 
+
         for(int i=0; i<items.size(); i++){
         std::string index = std::to_string(i);
         Item temp2 = items.at(i);
@@ -28,5 +32,3 @@
         }
         return os;
     }
-
-    

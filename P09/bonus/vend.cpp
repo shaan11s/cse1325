@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 
     new_machine.add("coke", 2);
     new_machine.add("pepsi", 2);
-    std::cout << new_machine.menu();
+    std::cout << new_machine;
     new_machine.buy(0);
      return 0;
 }
