@@ -2,28 +2,24 @@
 #include <stdexcept>
 #include "item.h"
 
-class Item{
+// class Item{
 
-    private:
+//     private:
+//     std::string _name;
+//     int _price;
 
-    std::string _name;
-    int _price;
-
-    public:
-
-    Item(std::string name, int price){
+//     public:
+    Item::Item(std::string name, int price){
         if(price<0) throw std::runtime_error("AddPositiveIntegers arguments must be positive");
         _name = name;
         _price = price;
-        
     }
 
-    std::string to_string(){
+    std::string Item::to_string(){
         std::string temp = _name;
-        temp + " ($";
+        temp += " ($";
         temp += std::to_string(_price);
-        temp + ")";
+        temp += ")";
         return temp;
     }
-
-};
+// };

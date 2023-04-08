@@ -6,12 +6,13 @@
 
 int main(int argc, char *argv[]) {
 
-    vending_machine new_machine = new vending_machine();
+    vending_machine new_machine = vending_machine();
 
     new_machine.add("coke", 2);
     new_machine.add("pepsi", 2);
-    new_machine.menu();
-    new_machine.buy("0");
+    std::string temp =new_machine.menu();
+    std::cout << temp;
+    new_machine.buy(0);
      return 0;
 }
 
