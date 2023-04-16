@@ -41,7 +41,7 @@ public class Store {
         for(Customer customers : customers) customers.save(bw);
 
         bw.write("" + orders.size() + '\n');
-       // for(Order orders : orders) orders.save(bw);
+        for(Order orders : orders) orders.save(bw);
 
     }
     

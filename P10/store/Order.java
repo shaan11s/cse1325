@@ -1,6 +1,7 @@
 package store;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Order {
@@ -35,11 +36,16 @@ public class Order {
 
     }
 
-    // public void save(BufferedWriter bw) throws IOException{
-    //     bw.write((int) (orderNumber + '\n'));
-    //     bw.write(customer.save(bw) + '\n');
-    //     bw.write(computers.save(bw) + '\n');
-    // }
+    public void save(BufferedWriter bw) throws IOException{
+        bw.write((int) (orderNumber + '\n'));
+        bw.write(' ');
+        customer.save(bw);
+        bw.write('\n');
+        String tempArr = computers.toString();
+        bw.write(tempArr);
+        bw.write('\n');
+
+    }
     
     @Override
     public String toString(){
