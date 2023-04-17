@@ -26,6 +26,9 @@ public class Store {
         while(size-- > 0) customers.add(new Customer(br));
 
         //read that many options
+        //HERE HERE
+      //  size = Integer.parseInt(br.readLine());
+      //  while(size-- > 0) orders.add(new Order(br));
         //read the number on next line, repeat for that array.
     }
     public void Save(BufferedWriter bw) throws IOException{

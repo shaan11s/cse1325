@@ -393,7 +393,11 @@ public class MainWin extends JFrame {
       for(int i=0; i<ComputersList.size(); i++){
         finalComputerList[i]=ComputersList.get(i);
       }
+      if(finalComputerList.length == 0){
+        JOptionPane.showMessageDialog(panel, "Store is Empty");
+        return;}
       JComboBox secondBox = new JComboBox((finalComputerList));
+   
 
       JOptionPane.showMessageDialog(null, secondBox, "Select Computer",
         JOptionPane.QUESTION_MESSAGE);

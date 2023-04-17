@@ -29,21 +29,38 @@ public class Order {
     public void addComputer(Computer computer){
         computers.add(computer);    
     }
-    public Order(BufferedReader br){
+    public Order(BufferedReader br) throws NumberFormatException, IOException{
+        this.orderNumber = Long.parseLong(br.readLine());
+        this.orderNumber --;
+        nextOrderNumber++;
+        this.customer = new Customer(br);
 
+        int size = Integer.parseInt(br.readLine());
+        while(size-- > 0) computers.add(new Computer(br));
+       // this.computers = new Computer(br);
     }
     public void Save(BufferedWriter bw){
 
     }
 
     public void save(BufferedWriter bw) throws IOException{
-        bw.write((int) (orderNumber + '\n'));
-        bw.write(' ');
+       // bw.write("DEBUG 1");
+        //bw.write(""+ nextOrderNumber + '\n');
+       // bw.write("DEBUG 2");
+        bw.write("" +orderNumber + '\n');
+       // bw.write("DEBUG 3");
+       // bw.write(' ');
+       // bw.write("DEBUG 4");
         customer.save(bw);
-        bw.write('\n');
+       // bw.write("DEBUG 5");
+       // bw.write('\n');
+        //bw.write("DEBUG 6");
         String tempArr = computers.toString();
-        bw.write(tempArr);
+        //bw.write("DEBUG 7");
+        bw.write(tempArr);      
+       // bw.write("DEBUG 8");
         bw.write('\n');
+       // bw.write("DEBUG 9");
 
     }
     
