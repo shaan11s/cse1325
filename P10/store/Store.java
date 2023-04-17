@@ -27,8 +27,8 @@ public class Store {
 
         //read that many options
         //HERE HERE
-      //  size = Integer.parseInt(br.readLine());
-      //  while(size-- > 0) orders.add(new Order(br));
+        size = Integer.parseInt(br.readLine());
+        while(size-- > 0) orders.add(new Order(br));
         //read the number on next line, repeat for that array.
     }
     public void Save(BufferedWriter bw) throws IOException{

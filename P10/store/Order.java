@@ -31,10 +31,8 @@ public class Order {
     }
     public Order(BufferedReader br) throws NumberFormatException, IOException{
         this.orderNumber = Long.parseLong(br.readLine());
-        this.orderNumber --;
         nextOrderNumber++;
         this.customer = new Customer(br);
-
         int size = Integer.parseInt(br.readLine());
         while(size-- > 0) computers.add(new Computer(br));
        // this.computers = new Computer(br);
@@ -55,12 +53,17 @@ public class Order {
        // bw.write("DEBUG 5");
        // bw.write('\n');
         //bw.write("DEBUG 6");
-        String tempArr = computers.toString();
-        //bw.write("DEBUG 7");
-        bw.write(tempArr);      
-       // bw.write("DEBUG 8");
-        bw.write('\n');
-       // bw.write("DEBUG 9");
+
+        ///hmm
+        bw.write("" +computers.size() + '\n');
+        for(int i=0; i<computers.size(); i++){
+            Computer temp = computers.get(i);
+            temp.save(bw);
+        }
+
+        // String tempArr = computers.toString();
+        // bw.write(tempArr);      
+       // bw.write('\n');
 
     }
     
