@@ -652,12 +652,28 @@ public class MainWin extends JFrame {
 
     protected void onInsertComputerClick() {     
       //ALL BUT OPTIONS DROP DOWN VALIDATED
-      String nameComputer = JOptionPane.showInputDialog("Enter Computer Name", "Computer");
-      if(nameComputer != null && !nameComputer.equals("Computer")){
-      String model = JOptionPane.showInputDialog("Enter Model", "Model");
-      if(model != null && !model.equals("Model")){
-      Computer computer = new Computer(nameComputer, model);
+      JPanel pane = new JPanel();
+      pane.setLayout(new GridLayout(0, 2, 2, 2));
 
+      JTextField computerName = new JTextField(5);
+      JTextField modelName = new JTextField(5);
+
+      pane.add(new JLabel("Enter Computer Name"));
+      pane.add(computerName);
+
+      pane.add(new JLabel("Enter Model"));
+      pane.add(modelName);
+
+      int option = JOptionPane.showConfirmDialog(null, pane, "Insert Computer", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+      
+      String nameInput = computerName.getText();
+      String modelInput = modelName.getText();
+      // String nameComputer = JOptionPane.showInputDialog("Enter Computer Name", "Computer");
+       if(nameInput != null && !nameInput.equals("")){
+      // String model = JOptionPane.showInputDialog("Enter Model", "Model");
+       if(modelInput != null && !modelInput.equals("")){
+       Computer computer = new Computer(nameInput, modelInput);
+      //  [DEBUG]System.out.println("\n\n\n"+computer + "\n\n\n");
       Object[] optionsArray = store.options();
       JComboBox<Object> selectOption = new JComboBox<>(optionsArray);
 
@@ -690,14 +706,35 @@ public class MainWin extends JFrame {
     }
     protected void onInsertOptionClick() {     
       //VALIDATED
-      String option = JOptionPane.showInputDialog("Enter Option", "Option");
-      if(option !=null && !option.equals("Option")){
-      String cost = JOptionPane.showInputDialog("Enter Cost [$xx.xx]");
-      long costDouble = (long) (Double.parseDouble(cost) * 100);
-      //JOptionPane.showInputDialog(costDouble);
-      Option newOption = new Option(option, costDouble);
-      store.add(newOption);
-      }
+      JPanel pane = new JPanel();
+      pane.setLayout(new GridLayout(0, 2, 2, 2));
+
+      JTextField option1 = new JTextField(5);
+      JTextField cost1 = new JTextField(5);
+
+      pane.add(new JLabel("Enter Option"));
+      pane.add(option1);
+
+      pane.add(new JLabel("Enter Cost [$xx.xx]"));
+      pane.add(cost1);
+
+      int option = JOptionPane.showConfirmDialog(null, pane, "Insert Option", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+      
+      String optionInput = option1.getText();
+      long costInput2 = (long) (Double.parseDouble(cost1.getText()) * 100);
+      //Long costInput2 = Long.parseLong(cost1.getText()) * 100;
+       Option newOption = new Option(optionInput, costInput2);
+       store.add(newOption);
+
+      // String option = JOptionPane.showInputDialog("Enter Option", "Option");
+      // if(option !=null && !option.equals("Option")){
+      // String cost = JOptionPane.showInputDialog("Enter Cost [$xx.xx]");
+      // long costDouble = (long) (Double.parseDouble(cost) * 100);
+
+      // //JOptionPane.showInputDialog(costDouble);
+      // Option newOption = new Option(option, costDouble);
+      // store.add(newOption);
+     // }
     }
 
     protected void onInsertCustomerClick() {        
@@ -730,6 +767,8 @@ public class MainWin extends JFrame {
                     JOptionPane.showMessageDialog(null, "Invalid Email");
                   }
                 }
+                //right here below is new code, should be good
+                if(newCustomer == null) return;
                 store.add(newCustomer);
                 }
           }

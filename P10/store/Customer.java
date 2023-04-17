@@ -14,7 +14,8 @@ public class Customer {
         int emailCheck = email.indexOf("@");
         int emailCheck2 = email.indexOf(".");
 
-        if(emailCheck < 0 && emailCheck2 <0){
+        //optimized to not short cirucit!
+        if(emailCheck < 0 || emailCheck2 <0){
             throw new IllegalArgumentException("Email is invalid");
         }
         this.email = email;
