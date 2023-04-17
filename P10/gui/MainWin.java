@@ -16,6 +16,8 @@ import javax.swing.Box;              // to create toolbar spacer
 import javax.swing.BoxLayout;
 import javax.swing.UIManager;        // to access default icons
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.GridLayout;
+import javax.swing.JTextField;
 
 import store.Customer;
 import store.Option;
@@ -699,23 +701,66 @@ public class MainWin extends JFrame {
     }
 
     protected void onInsertCustomerClick() {        
-    //VALIDATED
-    String name = JOptionPane.showInputDialog("Enter Customer Name", "Name");
-      if(name != null && !name.equals("Name")){
-    String email = JOptionPane.showInputDialog("Enter Customer Email", "Email");
-        if(email!=null && !email.equals("Email")){
-    Customer newCustomer = null;
-    try{
-      newCustomer = new Customer(name, email);
-    }catch(Exception e){
-      if(email != null){
-        JOptionPane.showMessageDialog(null, "Invalid Email");
+      JPanel pane = new JPanel();
+      pane.setLayout(new GridLayout(0, 2, 2, 2));
+
+      JTextField name1 = new JTextField(5);
+      JTextField email1 = new JTextField(5);
+
+      pane.add(new JLabel("Enter Customer Name"));
+      pane.add(name1);
+
+      pane.add(new JLabel("Enter Customer Email"));
+      pane.add(email1);
+
+      int option = JOptionPane.showConfirmDialog(null, pane, "Insert Customer", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+      
+      String nameInput = name1.getText();
+      String emailInput = email1.getText();
+      
+      if (option == JOptionPane.YES_OPTION) {
+
+        if(nameInput != null && !nameInput.equals("")){
+          if(emailInput!=null && !emailInput.equals("")){
+            Customer newCustomer = null;
+                try{
+                  newCustomer = new Customer(nameInput, emailInput);
+                }catch(Exception e){
+                  if(emailInput != null){
+                    JOptionPane.showMessageDialog(null, "Invalid Email");
+                  }
+                }
+                store.add(newCustomer);
+                }
+          }
+        }
+         
+
+          // try {
+          //     days = Integer.parseInt(nameInput);
+          //     assignments = Integer.parseInt(assignmentsInput);
+          // } catch (NumberFormatException nfe) {
+          //     nfe.printStackTrace();
+          // }
       }
-    }
-    store.add(newCustomer);
-     }
-   }
-  }
+  
+  //   //VALIDATED
+  //   String name = JOptionPane.showInputDialog("Enter Customer Name", "Name");
+  //     if(name != null && !name.equals("Name")){
+  //   String email = JOptionPane.showInputDialog("Enter Customer Email", "Email");
+  //       if(email!=null && !email.equals("Email")){
+  //   Customer newCustomer = null;
+  //   try{
+  //     newCustomer = new Customer(name, email);
+  //   }catch(Exception e){
+  //     if(email != null){
+  //       JOptionPane.showMessageDialog(null, "Invalid Email");
+  //     }
+  //   }
+  //   store.add(newCustomer);
+  //    }
+  //  }
+  
 
     protected void onNewStoreClick() {        
     }
@@ -781,6 +826,7 @@ public class MainWin extends JFrame {
           + "<p><font size=-2>https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1293738</font></p>"
           + "<p>Logo by OpenClipart-Vectors licensed under Pixabay License</p>"
           + "<p><font size=-2>https://pixabay.com/vectors/icon-user-person-symbol-people-1633249/</font></p>"
+          + "<p><font size=-2>all other images used were created by Shaan Sekhon</font></p>"
           + "</html>");
           
           //JPanel Canvas = new JPanel();
