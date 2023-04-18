@@ -79,7 +79,7 @@ public class Order {
             str.append(temp.toString());
         }
         //add the cost to tostring
-        str.append(" Total Cost " +  cost());
+        str.append(" Total Cost $" +  cost());
         String str2 = str.toString();
         return str2;
     }
