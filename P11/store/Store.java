@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Store {
@@ -34,6 +35,29 @@ public class Store {
         //read the number on next line, repeat for that array.
     }
     public void Save(BufferedWriter bw) throws IOException{
+
+        Save(bw, options);
+        Save(bw, computers);
+        Save(bw, customers);
+        Save(bw, orders);
+
+        // bw.write(name + '\n');
+
+        // bw.write("" + options.size() + '\n');
+        // for(Option option : options) option.save(bw);
+
+        // bw.write("" + computers.size() + '\n');
+        // for(Computer computers : computers) computers.save(bw);
+
+        // bw.write("" + customers.size() + '\n');
+        // for(Customer customers : customers) customers.save(bw);
+
+        // bw.write("" + orders.size() + '\n');
+        // for(Order orders : orders) orders.save(bw);
+
+    }
+
+    private <T extends Saveable> void Save(BufferedWriter bw, Set set) throws IOException{
         bw.write(name + '\n');
 
         bw.write("" + options.size() + '\n');
@@ -47,9 +71,8 @@ public class Store {
 
         bw.write("" + orders.size() + '\n');
         for(Order orders : orders) orders.save(bw);
-
     }
-    
+
     // ///////////////////////////////////////////////////////////
     // Customers
     

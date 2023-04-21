@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Objects;
 
-public class Computer {
+public class Computer implements Saveable {
     private String name;
     private String model;
     private ArrayList<Option> options = new ArrayList<>();
@@ -20,6 +20,7 @@ public class Computer {
         int size = Integer.parseInt(br.readLine());
         while(size-- > 0) options.add(new Option(br));
     }
+    @Override
     public void save(BufferedWriter bw) throws IOException{
         bw.write(name + '\n');
         bw.write(model + '\n');

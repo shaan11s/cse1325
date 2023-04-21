@@ -6,7 +6,7 @@ import java.util.Objects;
 
 //import org.w3c.dom.NameList;
 
-public class Option {
+public class Option implements Saveable {
     String name;
     long cost;
 
@@ -23,6 +23,7 @@ public class Option {
         this.name = br.readLine();
         this.cost = Long.parseLong(br.readLine());
     }
+    @Override
     public void save(BufferedWriter bw) throws IOException{
         bw.write(name + '\n');
         bw.write(""+ cost + '\n');
