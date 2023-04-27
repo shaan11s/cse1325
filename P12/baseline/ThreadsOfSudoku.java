@@ -36,21 +36,77 @@ public class ThreadsOfSudoku {
             //   the set of Sudoku candidate solutions split between them
             //   (for example, 0 to 40 for the first thread and 41-81 for the second).    
 
-            // Thread t1 = new Thread(){
-            //     @Override 
-            //     public void run(){
-            //         solveSuds(0, 45, 1);
-            //     }
-            // };
-            // t1.start();
+            Thread t1 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(0, 8, 1);
+                }
+            };
+            t1.start();
 
-            // Thread t2 = new Thread(){
-            //     @Override 
-            //     public void run(){
-            //         solveSuds(46, 80, 2);
-            //     }
-            // };
-            // t2.start();
+            Thread t2 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(9, 17, 2);
+                }
+            };
+            t2.start();
+
+            Thread t3 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(18, 26, 3);
+                }
+            };
+            t3.start();
+
+            Thread t4 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(27, 35, 4);
+                }
+            };
+            t4.start();
+
+            Thread t5 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(36, 44, 5);
+                }
+            };
+            t5.start();
+
+            Thread t6 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(45, 53, 6);
+                }
+            };
+            t6.start();
+
+            Thread t7 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(54, 62, 7);
+                }
+            };
+            t7.start();
+
+            Thread t8 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(63, 71, 8);
+                }
+            };
+            t8.start();
+
+            Thread t9 = new Thread(){
+                @Override 
+                public void run(){
+                    solveSuds(72, 80, 9);
+                }
+            };
+            t9.start();
             
 
             
@@ -63,7 +119,7 @@ public class ThreadsOfSudoku {
             // solveSuds(54, 62, 1);
             // solveSuds(63, 71, 1);
             // solveSuds(72, 80, 1);
-            solveSuds(0, suds.length-1, 1);
+            //solveSuds(0, suds.length-1, 1);
 
             // END WORK HERE
                         

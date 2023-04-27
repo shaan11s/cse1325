@@ -40,6 +40,9 @@ java ThreadsOfSudoku 2 puzzle.txt 14_zeros  105.60s user 0.33s system 185% cpu 5
 
 java ThreadsOfSudoku 1 puzzle.txt 14_zeros  101.28s user 0.75s system 100% cpu 1:41.73 total (1 thread)
 
+(for fun I tried more variations below)
+java ThreadsOfSudoku 9 puzzle.txt 14_zeros  116.93s user 0.49s system 801% cpu 14.649 total (9 threads)
+
 
 
 QUESTION 3: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?
